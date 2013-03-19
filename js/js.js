@@ -127,14 +127,12 @@ $(window).load(function () {
 	});
 
 	// Zoom
-	var zoom = 1;
+	var zoom = 0.9;
 	$(canvas).bind("mousewheel", function (e) {
 		if (e.originalEvent.wheelDelta < 0) {
 			// Scroll down
 			
-			if (zoom < 3) {
-				zoom += 0.1;
-			}
+			zoom += 0.1;
 		} else {
 			// Scroll up
 			
@@ -143,11 +141,10 @@ $(window).load(function () {
 			}
 		}
 
-		var newWidth = canvas.width * zoom;
-		var newHeight = canvas.height * zoom;
 		context.save();
-		context.translate(-((newWidth-canvas.width)/2), -((newHeight-canvas.height)/2));
+		context.translate(pos.x, pos.y);
 		context.scale(zoom, zoom);
+		context.translate(-pos.x, -pos.y);
 		context.clearRect(0, 0, canvas.width, canvas.height);
 		paint.draw();
 		context.restore();
