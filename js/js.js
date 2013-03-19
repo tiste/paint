@@ -105,6 +105,9 @@ $(window).load(function () {
 	canvas.addEventListener("dragover", paint.beginImport);
 	canvas.addEventListener("dragleave", paint.beginImport);
 	canvas.addEventListener("drop", paint.import);
+	canvas.addEventListener("mousemove", function (e) {
+		pos = getMousePos(e);
+	});
 
 	// CTRL + Z
 	var ctrlDown = false;
@@ -169,7 +172,6 @@ function Paint(id) {
 			flag = 0;
 
 			canvas.addEventListener("mousedown", mousedown = function (e) {
-				pos = getMousePos(e);
 				flag = 1;
 
 				context.beginPath();
@@ -178,8 +180,6 @@ function Paint(id) {
 
 			canvas.addEventListener("mousemove", mousemove = function (e) {
 				if (flag) {
-					pos = getMousePos(e);
-
 					context.lineTo(pos.x, pos.y);
 					context.strokeStyle = color;
 					context.lineWidth = thickness;
@@ -200,7 +200,6 @@ function Paint(id) {
 			flag = 0;
 
 			canvas.addEventListener("mousedown", mousedown = function (e) {
-				pos = getMousePos(e);
 				if (!flag) {
 					flag = 1;
 
@@ -220,7 +219,6 @@ function Paint(id) {
 
 			canvas.addEventListener("mousemove", mousemove = function (e) {
 				if (flag) {
-					pos = getMousePos(e);
 					context.clearRect(0, 0, canvas.width, canvas.height);
 
 					paint.draw();
@@ -248,7 +246,6 @@ function Paint(id) {
 			var x = 0, y = 0;
 
 			canvas.addEventListener("mousedown", mousedown = function (e) {
-				pos = getMousePos(e);
 				flag = 1;
 
 				x = pos.x;
@@ -257,7 +254,6 @@ function Paint(id) {
 
 			canvas.addEventListener("mousemove", mousemove = function (e) {
 				if (flag) {
-					pos = getMousePos(e);
 					context.clearRect(0, 0, canvas.width, canvas.height);
 
 					paint.draw();
@@ -272,7 +268,6 @@ function Paint(id) {
 			});
 			
 			canvas.addEventListener("mouseup", mouseup = function (e) {
-				pos = getMousePos(e);
 				flag = 0;
 
 				context.beginPath();
@@ -293,7 +288,6 @@ function Paint(id) {
 			var x = 0, y = 0;
 
 			canvas.addEventListener("mousedown", mousedown = function (e) {
-				pos = getMousePos(e);
 				flag = 1;
 
 				x = pos.x;
@@ -302,7 +296,6 @@ function Paint(id) {
 
 			canvas.addEventListener("mousemove", mousemove = function (e) {
 				if (flag) {
-					pos = getMousePos(e);
 					var radius = Math.sqrt(Math.pow((pos.x-x), 2) + Math.pow((pos.y-y), 2));
 					context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -316,7 +309,6 @@ function Paint(id) {
 			});
 			
 			canvas.addEventListener("mouseup", mouseup = function (e) {
-				pos = getMousePos(e);
 				flag = 0;
 
 				var radius = Math.sqrt(Math.pow((pos.x-x), 2) + Math.pow((pos.y-y), 2));
@@ -337,7 +329,6 @@ function Paint(id) {
 			var x = 0, y = 0;
 
 			canvas.addEventListener("mousedown", mousedown = function (e) {
-				pos = getMousePos(e);
 				flag = 1;
 
 				x = pos.x;
@@ -346,7 +337,6 @@ function Paint(id) {
 
 			canvas.addEventListener("mousemove", mousemove = function (e) {
 				if (flag) {
-					pos = getMousePos(e);
 					context.clearRect(0, 0, canvas.width, canvas.height);
 
 					paint.draw();
@@ -359,7 +349,6 @@ function Paint(id) {
 			});
 			
 			canvas.addEventListener("mouseup", mouseup = function (e) {
-				pos = getMousePos(e);
 				flag = 0;
 				
 				context.beginPath();
@@ -375,8 +364,6 @@ function Paint(id) {
 
 		case "pot":
 			canvas.addEventListener("mousedown", mousedown = function (e) {
-				pos = getMousePos(e);
-
 				startPixel = context.getImageData(pos.x, pos.y, 1, 1);
 				canvasCopy = context.getImageData(0, 0, canvas.width, canvas.height);
 				paint.pot(pos.x, pos.y);
@@ -391,14 +378,11 @@ function Paint(id) {
 			flag = 0;
 
 			canvas.addEventListener("mousedown", mousedown = function (e) {
-				pos = getMousePos(e);
 				flag = 1;
 			});
 
 			canvas.addEventListener("mousemove", mousemove = function (e) {
 				if (flag) {
-					var pos = getMousePos(e);
-
 					context.clearRect(pos.x, pos.y, thickness, thickness);
 				}
 			});
@@ -417,7 +401,6 @@ function Paint(id) {
 
 			canvas.addEventListener("mousedown", mousedown = function (e) {
 				if (!copying) {
-					pos = getMousePos(e);
 					flag = 1;
 
 					x = pos.x;
@@ -427,7 +410,6 @@ function Paint(id) {
 
 			canvas.addEventListener("mousemove", mousemove = function (e) {
 				if (flag) {
-					pos = getMousePos(e);
 					context.clearRect(0, 0, canvas.width, canvas.height);
 
 					paint.draw();
@@ -439,7 +421,6 @@ function Paint(id) {
 				}
 
 				if (copying) {
-					pos = getMousePos(e);
 					context.clearRect(0, 0, canvas.width, canvas.height);
 
 					paint.draw();
@@ -448,7 +429,6 @@ function Paint(id) {
 			});
 			
 			canvas.addEventListener("mouseup", mouseup = function (e) {
-				pos = getMousePos(e);
 				flag = 0;
 
 				if (!copying) {
@@ -573,13 +553,10 @@ function Paint(id) {
 		img.onload = function () {
 			paint.removeListener();
 			canvas.addEventListener("mousedown", mousedown = function (e) {
-				var pos = getMousePos(e);
-				
 				context.drawImage(img, pos.x, pos.y);
 			});
 
 			canvas.addEventListener("mousemove", mousemove = function (e) {
-				var pos = getMousePos(e);
 				context.clearRect(0, 0, canvas.width, canvas.height);
 
 				paint.draw();
