@@ -118,6 +118,12 @@ $(window).load(function () {
 
 		if (ctrlDown && e.keyCode == 90) {
 			undoCanvas(history.length-2);
+			e.preventDefault();
+		}
+
+		if (ctrlDown && e.keyCode == 83) {
+			paint.exportCanvas();
+			e.preventDefault();
 		}
 	});
 	window.addEventListener("keyup", function (e) {
