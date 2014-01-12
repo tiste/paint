@@ -1,0 +1,92 @@
+html, body {
+	height: 100%;
+}
+
+body {
+	font: 0.9em "Helvetica Neue", Helvetica, Arial, serif;
+	color: #F9F9F9;
+	margin: 0;
+	overflow: hidden;
+}
+
+::selection, *::-moz-selection {
+    cursor: crosshair;
+}
+
+
+/* Main */
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+}
+
+.textCenter {
+	text-align: center;
+}
+
+.marginTop {
+	margin-top: 20px;
+}
+
+.btnFixedHeight {
+	height: 34px !important;
+}
+
+.container-fluid {
+	padding-left: 0;
+	padding-right: 0;
+	height: 100%;
+}
+
+
+/* Canvas */
+
+canvas {
+	cursor: crosshair;
+}
+
+.layers {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 100%;
+	background-color: #F0F0F0;
+	border-left: double silver;
+}
+
+.panel {
+	background-color: #333;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	text-align: center;
+	box-shadow: 0 1px 3px rgba(0,0,0,.4);
+}
+
+.panel > div {
+	padding: 10px;
+}
+
+.textContent {
+	display: none;
+}
+
+img {
+	margin: 5px;
+	cursor: pointer;
+}
+
+
+/* Others */
+
+.popup {
+	position: absolute;
+	top: 250px;
+	border-radius: 20px;
+	text-align: center;
+	padding: 20px;
+	background-color: rgba(0,0,0,0.7);
+}
